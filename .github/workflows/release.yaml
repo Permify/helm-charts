@@ -21,15 +21,28 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email support@permify.co
 
-      - name: Install Helm
-        uses: azure/setup-helm@v3
+      - name: Import GPG key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --dearmor --output keyring.gpg
+          echo "${{ secrets.PASSPHRASE }}" > passphrase-file.txt
 
-      - name: Add repositories
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Add Repositories
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo update
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
+        with:
+          config: cr.yaml
         env:
+          CR_KEY: Permify <support@permify.co>
+          CR_KEYRING: keyring.gpg
+          CR_PASSPHRASE_FILE: passphrase-file.txt
+          CR_SIGN: true
           CR_TOKEN: "${{ secrets.GH_TOKEN }}"
