@@ -27,7 +27,6 @@ jobs:
       - name: Add repositories
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo add permify https://permify.github.io/helm-charts
           helm repo update
 
       - name: Run chart-releaser
