@@ -1,0 +1,18 @@
+apiVersion: v2
+name: permify
+description: Helm charts for deploying and managing Permify in Kubernetes environments.
+
+type: application
+version: 0.1.0
+appVersion: "v0.6.7"
+
+dependencies:
+  - name: postgresql
+    version: "13.2.27"
+    repository: https://charts.bitnami.com/bitnami
+    condition: dependencies.postgres.enabled
+  - name: common
+    version: "2.14.1"
+    repository: oci://registry-1.docker.io/bitnamicharts
+    tags:
+      - bitnami-common
