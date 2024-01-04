@@ -1,0 +1,162 @@
+# Global settings for the deployment
+replicaCount: 3
+image:
+  repository: ghcr.io/permify/permify
+  pullPolicy: Always
+  tag: ""
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Service Account configuration
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+# Annotations and labels for the pod
+annotations: {}
+podAnnotations: {}
+podLabels: {}
+
+# Security contexts
+podSecurityContext: {}
+securityContext: {}
+
+# Probes for monitoring the health and readiness of the application
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 12
+  successThreshold: 1
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+startupProbe:
+  enabled: false
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 30
+  successThreshold: 1
+
+# Custom probes (if any)
+customLivenessProbe: {}
+customReadinessProbe: {}
+customStartupProbe: {}
+
+# Service configuration
+service:
+  annotations: {}
+  type: ClusterIP
+  port: 3476
+
+# Application specific configuration
+app:
+  server:
+    rate_limit: 100_000
+    http:
+      enabled: true
+      port: 3476
+      tls:
+        enabled: false
+    grpc:
+      port: 3478
+      tls:
+        enabled: false
+
+  logger:
+    level: info
+
+  profiler:
+    enabled: true
+    port: 6060
+
+  authn:
+    enabled: false
+    method: preshared
+    preshared:
+      keys: ['secret']
+
+  tracer:
+    enabled: false
+
+  meter:
+    enabled: false
+    exporter: 'otlp'
+    endpoint: 'telemetry.permify.co'
+
+  service:
+    circuit_breaker: false
+    watch:
+      enabled: false
+    schema:
+      cache:
+        number_of_counters: 1_000
+        max_cost: 8MiB
+    permission:
+      concurrency_limit: 100
+      cache:
+        number_of_counters: 10_000
+        max_cost: 16MiB
+
+  database:
+    engine: memory
+    # Uncomment to use PostgreSQL
+    # uri: postgres://postgres:secret@localhost:5432/permify?sslmode=disable
+    # auto_migrate: true
+    # max_open_connections: 20
+    # max_idle_connections: 1
+    # max_connection_lifetime: 300s
+    # max_connection_idle_time: 60s
+    garbage_collection:
+      enabled: false
+      # interval: 200h
+      # window: 200h
+      # timeout: 5m
+
+  distributed:
+    enabled: false
+    address: "demo:///grpc.demo.consistent_hash_balancer"
+    port: 5053
+
+# Dependencies (like PostgreSQL) - enable as needed
+dependencies:
+  postgres:
+    enabled: false
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+# Resource requests and limits
+resources: {}
+
+# Autoscaling configuration
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+# Node, tolerations, and affinity configurations
+nodeSelector: {}
+tolerations: []
+affinity: {}
