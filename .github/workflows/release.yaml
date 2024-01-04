@@ -18,15 +18,12 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "$GITHUB_ACTOR"
+          git config user.name github-actions
           git config user.email support@permify.co
 
-      - name: Import GPG Key
+      - name: Import GPG key
         run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import --batch
-
-      - name: Create Passphrase File
-        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --dearmor --output keyring.gpg
           echo "${{ secrets.PASSPHRASE }}" > passphrase-file.txt
 
       - name: Set up Helm
