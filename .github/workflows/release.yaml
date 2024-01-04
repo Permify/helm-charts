@@ -28,7 +28,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
 
       - name: Export GPG key
-        run: gpg --export-secret-keys > ~/.gnupg/pubring.gpg
+        run: |
+          gpg --export --armor > ~/.gnupg/pubring.gpg
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
