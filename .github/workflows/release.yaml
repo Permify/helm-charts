@@ -21,9 +21,12 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email support@permify.co
 
-      - name: Import GPG key
+      - name: Import GPG Key
         run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --dearmor --output keyring.gpg
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import --batch
+
+      - name: Create Passphrase File
+        run: |
           echo "${{ secrets.PASSPHRASE }}" > passphrase-file.txt
 
       - name: Set up Helm
@@ -38,8 +41,6 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
-        with:
-          config: cr.yaml
         env:
           CR_KEY: Permify <support@permify.co>
           CR_KEYRING: keyring.gpg
