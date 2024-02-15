@@ -166,11 +166,6 @@ spec:
               value: "{{ .Values.app.tracer.exporter }}"
             {{- end }}
 
-            {{- if .Values.app.tracer.exporter }}
-            - name: PERMIFY_TRACER_EXPORTER
-              value: "{{ .Values.app.tracer.exporter }}"
-            {{- end }}
-
             {{- if .Values.app.tracer.endpoint }}
             - name: PERMIFY_TRACER_ENDPOINT
               value: "{{ .Values.app.tracer.endpoint }}"
