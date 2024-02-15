@@ -61,6 +61,7 @@ service:
 
 # Application specific configuration
 app:
+  account_id: ""
   server:
     rate_limit: 100_000
     http:

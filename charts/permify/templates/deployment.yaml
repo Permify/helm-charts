@@ -55,6 +55,11 @@ spec:
 
           env:
 
+            {{- if .Values.app.account_id }}
+            - name: PERMIFY_ACCOUNT_ID
+              value: "{{ .Values.app.account_id }}"
+            {{- end }}
+
             {{- if .Values.app.server.rate_limit }}
             - name: PERMIFY_RATE_LIMIT
               value: "{{ .Values.app.server.rate_limit }}"
