@@ -85,6 +85,7 @@ app:
     enabled: false
     method: preshared
     preshared:
+      # keys_secret:
       keys: ['secret']
 
   tracer:
@@ -112,7 +113,9 @@ app:
   database:
     engine: memory
     # Uncomment to use PostgreSQL
+    # engine: postgres
     # uri: postgres://postgres:secret@localhost:5432/permify?sslmode=disable
+    # uri_secret:
     # auto_migrate: true
     # max_open_connections: 20
     # max_idle_connections: 1
