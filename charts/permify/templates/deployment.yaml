@@ -143,6 +143,12 @@ spec:
             {{- if .Values.app.authn.preshared.keys }}
             - name: PERMIFY_AUTHN_PRESHARED_KEYS
               value: {{ join "," .Values.app.authn.preshared.keys }}
+            {{- else if .Values.app.authn.preshared.keys_secret }}
+            - name: PERMIFY_AUTHN_PRESHARED_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.app.authn.preshared.keys_secret }}"
+                  key: "preshared_keys"
             {{- end }}
 
             {{- if .Values.app.authn.oidc.issuer }}
@@ -150,9 +156,9 @@ spec:
               value: "{{ .Values.app.authn.oidc.issuer }}"
             {{- end }}
 
-            {{- if .Values.app.authn.oidc.client_id }}
-            - name: PERMIFY_AUTHN_OIDC_CLIENT_ID
-              value: "{{ .Values.app.authn.oidc.client_id }}"
+            {{- if .Values.app.authn.oidc.audience }}
+            - name: PERMIFY_AUTHN_OIDC_AUDIENCE
+              value: "{{ .Values.app.authn.oidc.audience }}"
             {{- end }}
 
             {{- end }}
@@ -252,6 +258,12 @@ spec:
             {{- if .Values.app.database.uri }}
             - name: PERMIFY_DATABASE_URI
               value: "{{ .Values.app.database.uri }}"
+            {{- else if .Values.app.database.uri_secret }}
+            - name: PERMIFY_DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.app.database.uri_secret }}"
+                  key: "uri"
             {{- end }}
 
             {{- if .Values.app.database.auto_migrate }}
