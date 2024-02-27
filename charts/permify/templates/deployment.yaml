@@ -151,6 +151,8 @@ spec:
                   key: "preshared_keys"
             {{- end }}
 
+            {{- if .Values.app.authn.oidc }}
+
             {{- if .Values.app.authn.oidc.issuer }}
             - name: PERMIFY_AUTHN_OIDC_ISSUER
               value: "{{ .Values.app.authn.oidc.issuer }}"
@@ -159,6 +161,8 @@ spec:
             {{- if .Values.app.authn.oidc.audience }}
             - name: PERMIFY_AUTHN_OIDC_AUDIENCE
               value: "{{ .Values.app.authn.oidc.audience }}"
+            {{- end }}
+
             {{- end }}
 
             {{- end }}
