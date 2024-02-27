@@ -156,9 +156,9 @@ spec:
               value: "{{ .Values.app.authn.oidc.issuer }}"
             {{- end }}
 
-            {{- if .Values.app.authn.oidc.client_id }}
-            - name: PERMIFY_AUTHN_OIDC_CLIENT_ID
-              value: "{{ .Values.app.authn.oidc.client_id }}"
+            {{- if .Values.app.authn.oidc.audience }}
+            - name: PERMIFY_AUTHN_OIDC_AUDIENCE
+              value: "{{ .Values.app.authn.oidc.audience }}"
             {{- end }}
 
             {{- end }}
