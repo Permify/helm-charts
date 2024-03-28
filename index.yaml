@@ -5,6 +5,38 @@ entries:
       category: Security
       licenses: Apache-2.0
     apiVersion: v2
+    appVersion: v0.7.9
+    created: "2024-03-28T09:02:32.578144123Z"
+    dependencies:
+    - condition: dependencies.postgres.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.27
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.14.1
+    description: Helm charts for deploying and managing Permify in Kubernetes environments.
+    digest: ef7e5f9fdd28ecdcb756f10ea336c60fac179e54901f371481b191e41bdcb3ae
+    home: https://permify.co
+    icon: https://github.com/Permify/helm-charts/assets/39353278/76147e5c-6e86-46b0-bc3d-cf67947c37d0
+    keywords:
+    - security
+    - abac
+    - permissions
+    - fine-grained-access-control
+    - zanzibar
+    - rebac
+    name: permify
+    type: application
+    urls:
+    - https://github.com/Permify/helm-charts/releases/download/permify-0.2.1/permify-0.2.1.tgz
+    version: 0.2.1
+  - annotations:
+      category: Security
+      licenses: Apache-2.0
+    apiVersion: v2
     appVersion: v0.7.7
     created: "2024-02-27T18:40:27.043128742Z"
     dependencies:
@@ -353,4 +385,4 @@ entries:
     urls:
     - https://github.com/Permify/helm-charts/releases/download/permify-0.1.0/permify-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-27T18:40:27.043166743Z"
+generated: "2024-03-28T09:02:32.578195799Z"
