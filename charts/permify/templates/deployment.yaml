@@ -140,6 +140,8 @@ spec:
               value: "{{ .Values.app.authn.method }}"
             {{- end }}
 
+            {{- if .Values.app.authn.preshared }}
+
             {{- if .Values.app.authn.preshared.keys }}
             - name: PERMIFY_AUTHN_PRESHARED_KEYS
               value: {{ join "," .Values.app.authn.preshared.keys }}
@@ -149,6 +151,8 @@ spec:
                 secretKeyRef:
                   name: "{{ .Values.app.authn.preshared.keys_secret }}"
                   key: "preshared_keys"
+            {{- end }}
+
             {{- end }}
 
             {{- if .Values.app.authn.oidc }}
