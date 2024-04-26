@@ -195,6 +195,11 @@ spec:
               value: "{{ .Values.app.tracer.urlpath }}"
             {{- end }}
 
+            {{- if .Values.app.tracer.headers }}
+            - name: PERMIFY_TRACER_HEADERS
+              value: "{{ .Values.app.tracer.headers }}"
+            {{- end }}
+
             {{- end }}
 
             {{- if .Values.app.meter.enabled }}
@@ -219,6 +224,11 @@ spec:
             {{- if .Values.app.meter.urlpath }}
             - name: PERMIFY_METER_URL_PATH
               value: "{{ .Values.app.meter.urlpath }}"
+            {{- end }}
+
+            {{- if .Values.app.meter.headers }}
+            - name: PERMIFY_METER_HEADERS
+              value: "{{ .Values.app.meter.headers }}"
             {{- end }}
 
             {{- end }}
