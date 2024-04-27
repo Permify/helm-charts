@@ -197,7 +197,7 @@ spec:
 
             {{- if .Values.app.tracer.headers }}
             - name: PERMIFY_TRACER_HEADERS
-              value: "{{ .Values.app.tracer.headers }}"
+              value: {{ join "," .Values.app.tracer.headers }}
             {{- end }}
 
             {{- end }}
@@ -228,7 +228,7 @@ spec:
 
             {{- if .Values.app.meter.headers }}
             - name: PERMIFY_METER_HEADERS
-              value: "{{ .Values.app.meter.headers }}"
+              value: {{ join "," .Values.app.meter.headers }}
             {{- end }}
 
             {{- end }}
