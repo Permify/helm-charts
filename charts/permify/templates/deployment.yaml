@@ -289,6 +289,11 @@ spec:
               value: "{{ .Values.app.database.auto_migrate }}"
             {{- end }}
 
+            {{- if .Values.app.database.simple_mode }}
+            - name: PERMIFY_DATABASE_SIMPLE_MODE
+              value: "{{ .Values.app.database.simple_mode }}"
+            {{- end }}
+
             {{- if .Values.app.database.max_open_connections }}
             - name: PERMIFY_DATABASE_MAX_OPEN_CONNECTIONS
               value: "{{ .Values.app.database.max_open_connections }}"
