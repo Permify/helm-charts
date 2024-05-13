@@ -284,6 +284,16 @@ spec:
                   key: "uri"
             {{- end }}
 
+            {{- if .Values.app.database.writer.uri }}
+            - name: PERMIFY_DATABASE_WRITER_URI
+              value: "{{ .Values.app.database.writer.uri }}"
+            {{- end }}
+
+            {{- if .Values.app.database.reader.uri }}
+            - name: PERMIFY_DATABASE_READER_URI
+              value: "{{ .Values.app.database.reader.uri }}"
+            {{- end }}
+
             {{- if .Values.app.database.auto_migrate }}
             - name: PERMIFY_DATABASE_AUTO_MIGRATE
               value: "{{ .Values.app.database.auto_migrate }}"
