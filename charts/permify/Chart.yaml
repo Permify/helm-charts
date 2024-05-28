@@ -17,10 +17,10 @@ description: Helm charts for deploying and managing Permify in Kubernetes enviro
 type: application
 
 # The version of the Helm chart.
-version: 0.2.9
+version: 0.3.0
 
 # The specific application version that this Helm chart is designed to deploy.
-appVersion: "v0.8.6"
+appVersion: "v0.8.8"
 
 # Keywords associated with the Helm chart for searchability.
 keywords:
@@ -42,7 +42,7 @@ dependencies:
   - name: postgresql
     version: "13.2.27"
     repository: https://charts.bitnami.com/bitnami
-    condition: dependencies.postgres.enabled
+    condition: postgres.enabled
 
   # Dependency on a common set of functionalities provided by Bitnami.
   - name: common
