@@ -132,9 +132,6 @@ app:
     address: "demo:///grpc.demo.consistent_hash_balancer"
     port: 5053
 
-postgresql:
-  enabled: false
-
 # Ingress configuration
 ingress:
   enabled: false
