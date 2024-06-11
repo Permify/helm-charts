@@ -167,6 +167,26 @@ spec:
               value: "{{ .Values.app.authn.oidc.audience }}"
             {{- end }}
 
+            {{- if .Values.app.authn.oidc.refresh_interval }}
+            - name: PERMIFY_AUTHN_OIDC_REFRESH_INTERVAL
+              value: "{{ .Values.app.authn.oidc.refresh_interval }}"
+            {{- end }}
+
+            {{- if .Values.app.authn.oidc.backoff_interval }}
+            - name: PERMIFY_AUTHN_OIDC_BACKOFF_INTERVAL
+              value: "{{ .Values.app.authn.oidc.backoff_interval }}"
+            {{- end }}
+
+            {{- if .Values.app.authn.oidc.backoff_max_retries }}
+            - name: PERMIFY_AUTHN_OIDC_BACKOFF_RETRIES
+              value: "{{ .Values.app.authn.oidc.backoff_max_retries }}"
+            {{- end }}
+
+            {{- if .Values.app.authn.oidc.valid_methods }}
+            - name: PERMIFY_AUTHN_OIDC_VALID_METHODS
+              value: {{ join "," .Values.app.authn.oidc.valid_methods }}
+            {{- end }}
+
             {{- end }}
 
             {{- end }}
@@ -284,12 +304,12 @@ spec:
                   key: "uri"
             {{- end }}
 
-            {{- if .Values.app.database.writer.uri }}
+            {{- if .Values.app.database.writer }}
             - name: PERMIFY_DATABASE_WRITER_URI
               value: "{{ .Values.app.database.writer.uri }}"
             {{- end }}
 
-            {{- if .Values.app.database.reader.uri }}
+            {{- if .Values.app.database.reader }}
             - name: PERMIFY_DATABASE_READER_URI
               value: "{{ .Values.app.database.reader.uri }}"
             {{- end }}
