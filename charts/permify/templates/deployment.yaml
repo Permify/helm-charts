@@ -65,6 +65,11 @@ spec:
               value: "{{ .Values.app.server.rate_limit }}"
             {{- end }}
 
+            {{- if .Values.app.server.name_override }}
+            - name: PERMIFY_NAME_OVERRIDE
+              value: "{{ .Values.app.server.name_override }}"
+            {{- end }}
+
             {{- if .Values.app.server.grpc.port }}
             - name: PERMIFY_GRPC_PORT
               value: "{{ .Values.app.server.grpc.port }}"
@@ -129,6 +134,36 @@ spec:
             {{- if .Values.app.logger.output }}
             - name: PERMIFY_LOG_OUTPUT
               value: "{{ .Values.app.logger.output }}"
+            {{- end }}
+
+            {{- if .Values.app.logger.enabled }}
+            - name: PERMIFY_LOG_ENABLED
+              value: "{{ .Values.app.logger.enabled }}"
+            {{- end }}
+
+            {{- if .Values.app.logger.exporter }}
+            - name: PERMIFY_LOG_EXPORTER
+              value: "{{ .Values.app.logger.exporter }}"
+            {{- end }}
+
+            {{- if .Values.app.logger.endpoint }}
+            - name: PERMIFY_LOG_ENDPOINT
+              value: "{{ .Values.app.logger.endpoint }}"
+            {{- end }}
+
+            {{- if .Values.app.logger.insecure }}
+            - name: PERMIFY_LOG_INSECURE
+              value: "{{ .Values.app.logger.insecure }}"
+            {{- end }}
+
+            {{- if .Values.app.logger.urlpath }}
+            - name: PERMIFY_LOG_URL_PATH
+              value: "{{ .Values.app.logger.urlpath }}"
+            {{- end }}
+
+            {{- if .Values.app.logger.headers }}
+            - name: PERMIFY_LOG_HEADERS
+              value: {{ join "," .Values.app.logger.headers }}
             {{- end }}
 
             {{- if .Values.app.authn.enabled }}
