@@ -374,6 +374,11 @@ spec:
               value: "{{ .Values.app.database.max_connection_idle_time }}"
             {{- end }}
 
+            {{- if .Values.app.database.max_data_per_write }}
+            - name: PERMIFY_DATABASE_MAX_DATA_PER_WRITE
+              value: "{{ .Values.app.database.max_data_per_write }}"
+            {{- end }}
+
             {{- if .Values.app.database.garbage_collection.enabled }}
             - name: PERMIFY_DATABASE_GARBAGE_COLLECTION_ENABLED
               value: "{{ .Values.app.database.garbage_collection.enabled }}"
