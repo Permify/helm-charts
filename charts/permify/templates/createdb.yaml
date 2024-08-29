@@ -1,0 +1,49 @@
+{{- if eq .Values.app.database.engine "postgres" }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "cretedb-{{ .Release.Name }}"
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  ttlSecondsAfterFinished: 500
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+        app.kubernetes.io/instance: {{ .Release.Name | quote }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    spec:
+      containers:
+      - name: createdb
+        image: postgres:11-alpine # A relatively small official image that can run psql
+        command:
+          - sh
+          - -c
+          - >
+              while ! pg_isready -U postgres -h ${DBHOST} -p ${DBPORT}; do sleep 1; done;
+
+              DB_EXISTS=$(psql "${DBURI}" -tAc "SELECT 1 FROM pg_database WHERE datname='${DBNAME}'")
+              
+              if [ "$DB_EXISTS" != "1" ]; then
+                psql "${DBURI}" -c "CREATE DATABASE \"${DBNAME}\""
+              fi
+        env:
+        - name: DBNAME
+          value: {{ .Values.app.database.dbname | quote }}
+        - name: DBHOST
+          value: {{ .Values.app.database.host | quote }}
+        - name: DBPORT
+          value: {{ .Values.app.database.port | quote }}
+        - name: DBURI
+          value: {{ .Values.app.database.uri | quote }}
+      restartPolicy: OnFailure
+  backoffLimit: 2
+...
+{{ end }}

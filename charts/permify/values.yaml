@@ -114,6 +114,9 @@ app:
     engine: memory
     # Uncomment to use PostgreSQL
     # engine: postgres
+    # host:
+    # port:
+    # dbname:
     # uri: postgres://postgres:secret@localhost:5432/permify?sslmode=disable
     # uri_secret:
     # auto_migrate: true
