@@ -1,9 +1,9 @@
-{{- if eq .Values.app.database.engine "postgres" }}
+{{- if eq .Values.jobs.createDatabase.enabled }}
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "cretedb-{{ .Release.Name }}"
+  name: "crete-database-{{ .Release.Name }}"
   labels:
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
@@ -21,7 +21,7 @@ spec:
         helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     spec:
       containers:
-      - name: createdb
+      - name: crete-database
         image: postgres:11-alpine # A relatively small official image that can run psql
         command:
           - sh
@@ -36,13 +36,13 @@ spec:
               fi
         env:
         - name: DBNAME
-          value: {{ .Values.app.database.dbname | quote }}
+          value: {{ .Values.jobs.createDatabase.name | quote }}
         - name: DBHOST
-          value: {{ .Values.app.database.host | quote }}
+          value: {{ .Values.jobs.createDatabase.host | quote }}
         - name: DBPORT
-          value: {{ .Values.app.database.port | quote }}
+          value: {{ .Values.jobs.createDatabase.port | quote }}
         - name: DBURI
-          value: {{ .Values.app.database.uri | quote }}
+          value: {{ .Values.jobs.createDatabase.uri | quote }}
       restartPolicy: OnFailure
   backoffLimit: 2
 ...

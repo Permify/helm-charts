@@ -114,9 +114,6 @@ app:
     engine: memory
     # Uncomment to use PostgreSQL
     # engine: postgres
-    # host:
-    # port:
-    # dbname:
     # uri: postgres://postgres:secret@localhost:5432/permify?sslmode=disable
     # uri_secret:
     # auto_migrate: true
@@ -149,6 +146,14 @@ ingress:
 
 # Resource requests and limits
 resources: {}
+
+jobs:
+  createDatabase:
+    enabled: true
+    name:
+    host:
+    port:
+    uri: postgres://postgres:secret@localhost:5432/permify?sslmode=disable
 
 # Autoscaling configuration
 autoscaling:
