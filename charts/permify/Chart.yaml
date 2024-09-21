@@ -20,7 +20,7 @@ type: application
 version: 0.3.6
 
 # The specific application version that this Helm chart is designed to deploy.
-appVersion: "v1.0.4"
+appVersion: "v1.1.0"
 
 # Keywords associated with the Helm chart for searchability.
 keywords:
