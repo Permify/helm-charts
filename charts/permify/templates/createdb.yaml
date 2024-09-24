@@ -1,4 +1,4 @@
-{{- if eq .Values.jobs.createDatabase.enabled }}
+{{- if .Values.jobs.createDatabase.enabled }}
 ---
 apiVersion: batch/v1
 kind: Job
