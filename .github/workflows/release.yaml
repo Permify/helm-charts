@@ -39,7 +39,7 @@ jobs:
           helm repo add permify https://permify.github.io/helm-charts
           helm repo update
 
-      # Update Helm dependencies before packaging
+      # Update Helm Dependencies before packaging
       - name: Update Helm Dependencies
         run: |
           helm dependency update ./charts/permify
@@ -47,7 +47,7 @@ jobs:
       # Package and Sign Helm Chart
       - name: Package and Sign Helm Chart
         run: |
-          helm package ./charts/permify --sign --key "info@permify.co" --keyring /github/home/.gnupg/secring.gpg
+          helm package ./charts/permify --sign --key "info@permify.co"
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
