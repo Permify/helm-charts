@@ -28,13 +28,14 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
 
-      - name: Verify GPG Key Import
-        run: gpg --list-secret-keys
-
       - name: Set up Helm
         uses: azure/setup-helm@v4
         with:
           version: v3.8.1
+
+      - name: Package and Sign Helm Chart
+        run: |
+          helm package ./charts/permify --sign --key "info@permify.co" --keyring ~/.gnupg/pubring.gpg
 
       - name: Add Repositories
         run: |
@@ -49,3 +50,6 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GH_TOKEN }}"
           CR_SKIP_EXISTING: true
+
+      - name: Verify Chart Signing
+        run: helm verify ./charts/permify.tgz
