@@ -15,3 +15,7 @@ jobs:
         with:
           input: charts/permify/values.yaml
           output: charts/permify/values.schema.json
+          git-push: true
+          git-push-user-name: "github-actions[bot]"
+          git-push-user-email: "github-actions[bot]@users.noreply.github.com"
+          git-commit-message: "chore: update values schema json"
