@@ -39,6 +39,11 @@ jobs:
           helm repo add permify https://permify.github.io/helm-charts
           helm repo update
 
+      # Update Helm dependencies before packaging
+      - name: Update Helm Dependencies
+        run: |
+          helm dependency update ./charts/permify
+
       # Package and Sign Helm Chart
       - name: Package and Sign Helm Chart
         run: |
