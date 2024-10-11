@@ -28,11 +28,6 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
 
-      # Convert to pubring.gpg format (Legacy)
-      - name: Export GPG key to legacy format
-        run: |
-          gpg --export-secret-keys > ~/.gnupg/pubring.gpg
-
       - name: Set up Helm
         uses: azure/setup-helm@v4
         with:
@@ -43,6 +38,11 @@ jobs:
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add permify https://permify.github.io/helm-charts
           helm repo update
+
+      # Package and Sign Helm Chart
+      - name: Package and Sign Helm Chart
+        run: |
+          helm package ./charts/permify --sign --key "info@permify.co" --keyring /github/home/.gnupg/secring.gpg
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
