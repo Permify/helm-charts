@@ -33,6 +33,10 @@ jobs:
         with:
           version: v3.8.1
 
+      - name: Helm Dependency Update
+        run: |
+          helm dependency update ./charts/permify
+          
       - name: Package and Sign Helm Chart
         run: |
           helm package ./charts/permify --sign --key "info@permify.co" --keyring ~/.gnupg/pubring.gpg
