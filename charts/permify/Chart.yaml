@@ -17,10 +17,10 @@ description: Helm charts for deploying and managing Permify in Kubernetes enviro
 type: application
 
 # The version of the Helm chart.
-version: 0.3.7
+version: 0.3.8
 
 # The specific application version that this Helm chart is designed to deploy.
-appVersion: "v1.1.1"
+appVersion: "v1.1.3"
 
 # Keywords associated with the Helm chart for searchability.
 keywords:
