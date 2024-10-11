@@ -33,8 +33,11 @@ keywords:
 
 # Annotations for additional metadata.
 annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/signKey: |
+    fingerprint: B1A35EA6E5DE5DB2C787AF7A1BFCA5ED7F16FEA2
+    url: https://permify.github.io/helm-charts/pgp-public-key.asc
   category: Security
-  licenses: Apache-2.0
 
 # Dependencies required by the application.
 dependencies:
