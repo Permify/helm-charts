@@ -44,11 +44,6 @@ jobs:
         run: |
           helm dependency update ./charts/permify
 
-      # Package and Sign Helm Chart
-      - name: Package and Sign Helm Chart
-        run: |
-          helm package ./charts/permify --sign --key "info@permify.co"
-
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
