@@ -14,3 +14,4 @@ jobs:
         uses: losisin/helm-values-schema-json-action@v1
         with:
           input: charts/permify/values.yaml
+          output: charts/permify/values.schema.json
