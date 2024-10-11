@@ -20,7 +20,7 @@ jobs:
       - name: Configure Git
         run: |
           git config user.name github-actions
-          git config user.email support@permify.co
+          git config user.email info@permify.co
 
       - name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
