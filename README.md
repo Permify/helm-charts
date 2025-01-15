@@ -1,9 +1,12 @@
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Permify/permify/raw/master/assets/logo-permify-dark.png">
+    <img alt="Permify logo" src="https://github.com/Permify/permify/raw/master/assets/logo-permify-light.png" width="40%">
+  </picture>
+</div>
 <h1 align="center">
-    <img src="https://raw.githubusercontent.com/Permify/permify/master/assets/permify-logo.svg" alt="Permify logo" width="336px" /><br />
     Permify Helm Charts
-
 </h1>
-
 <p align="center">
     <a href="https://artifacthub.io/packages/search?repo=permify" target="_blank"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/permify&style=for-the-badge" alt="GitHub package.json version" /></a>&nbsp;
     <a href="https://github.com/Permify/permify" target="_blank"><img src="https://img.shields.io/github/license/Permify/helm-charts?style=for-the-badge" alt="Permify Licence" /></a>&nbsp;
