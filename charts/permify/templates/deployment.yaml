@@ -212,6 +212,11 @@ spec:
               value: "{{ .Values.app.authn.oidc.backoff_interval }}"
             {{- end }}
 
+            {{- if .Values.app.authn.oidc.backoff_frequency }}
+            - name: PERMIFY_AUTHN_OIDC_BACKOFF_FREQUENCY
+              value: "{{ .Values.app.authn.oidc.backoff_frequency }}"
+            {{- end }}
+
             {{- if .Values.app.authn.oidc.backoff_max_retries }}
             - name: PERMIFY_AUTHN_OIDC_BACKOFF_RETRIES
               value: "{{ .Values.app.authn.oidc.backoff_max_retries }}"
