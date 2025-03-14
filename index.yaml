@@ -8,6 +8,37 @@ entries:
         url: https://permify.github.io/helm-charts/pgp-public-key.asc
       category: Security
     apiVersion: v2
+    appVersion: v1.3.5
+    created: "2025-03-14T10:35:24.804101854Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.14.1
+    description: Helm charts for deploying and managing Permify in Kubernetes environments.
+    digest: 03b0e7f6635a652a6a71a5d8d9016a40ebad59dc38a719dc299f6ad72ced780e
+    home: https://permify.co
+    icon: https://github.com/Permify/helm-charts/assets/39353278/76147e5c-6e86-46b0-bc3d-cf67947c37d0
+    keywords:
+    - security
+    - abac
+    - permissions
+    - fine-grained-access-control
+    - zanzibar
+    - rebac
+    name: permify
+    type: application
+    urls:
+    - https://github.com/Permify/helm-charts/releases/download/permify-0.4.0/permify-0.4.0.tgz
+    version: 0.4.0
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/signKey: |
+        fingerprint: B1A35EA6E5DE5DB2C787AF7A1BFCA5ED7F16FEA2
+        url: https://permify.github.io/helm-charts/pgp-public-key.asc
+      category: Security
+    apiVersion: v2
     appVersion: v1.1.3
     created: "2024-10-11T08:36:01.454546824Z"
     dependencies:
@@ -896,4 +927,4 @@ entries:
     urls:
     - https://github.com/Permify/helm-charts/releases/download/permify-0.1.0/permify-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-11T08:36:01.454819572Z"
+generated: "2025-03-14T10:35:24.804268212Z"
