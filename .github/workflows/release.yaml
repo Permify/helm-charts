@@ -11,8 +11,9 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -21,17 +22,6 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email info@permify.co
-
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
-
-      - name: Export public key to keyring
-        run: |
-          mkdir -p ~/.gnupg
-          gpg --export > ~/.gnupg/pubring.gpg
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
