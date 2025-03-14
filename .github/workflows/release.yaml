@@ -28,6 +28,11 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
 
+      - name: Export public key to keyring
+        run: |
+          mkdir -p ~/.gnupg
+          gpg --export --armor > ~/.gnupg/pubring.gpg
+
       - name: Set up Helm
         uses: azure/setup-helm@v4
         with:
@@ -39,7 +44,6 @@ jobs:
           helm repo add permify https://permify.github.io/helm-charts
           helm repo update
 
-      # Update Helm Dependencies before packaging
       - name: Update Helm Dependencies
         run: |
           helm dependency update ./charts/permify
