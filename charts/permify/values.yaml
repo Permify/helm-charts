@@ -167,3 +167,7 @@ autoscaling:
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+# Structure this deployment.initContainers value as if you were adding the container
+# to the Deployment's spec.template.spec.containers key.
+initContainers: []
