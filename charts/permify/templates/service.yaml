@@ -30,9 +30,6 @@ spec:
       protocol: TCP
     {{- end }}
 
-    - name: invoker
-      port: {{ .Values.app.distributed.port }}
-      targetPort: invoker
 
   selector:
     {{- include "permify.selectorLabels" . | nindent 4 }}
