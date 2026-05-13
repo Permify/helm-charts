@@ -177,15 +177,15 @@ spec:
 
             {{- if .Values.app.authn.preshared }}
 
-            {{- if .Values.app.authn.preshared.keys_secret }}
+            {{- if .Values.app.authn.preshared.keys }}
+            - name: PERMIFY_AUTHN_PRESHARED_KEYS
+              value: {{ join "," .Values.app.authn.preshared.keys }}
+            {{- else if .Values.app.authn.preshared.keys_secret }}
             - name: PERMIFY_AUTHN_PRESHARED_KEYS
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.app.authn.preshared.keys_secret }}"
                   key: "preshared_keys"
-            {{- else if .Values.app.authn.preshared.keys }}
-            - name: PERMIFY_AUTHN_PRESHARED_KEYS
-              value: {{ join "," .Values.app.authn.preshared.keys }}
             {{- end }}
 
             {{- end }}

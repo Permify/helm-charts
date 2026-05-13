@@ -1,21 +1,27 @@
-name: Generate values schema json
+name: Validate values schema json
 on:
   pull_request:
   workflow_dispatch:
-  
+
 jobs:
-  generate:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      - uses: actions/setup-go@v5
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-      - name: Generate values schema json
-        uses: losisin/helm-values-schema-json-action@v2
-        with:
-          input: charts/permify/values.yaml
-          output: charts/permify/values.schema.json
-          git-push: true
-          git-push-user-name: "github-actions[bot]"
-          git-push-user-email: "github-actions[bot]@users.noreply.github.com"
-          git-commit-message: "chore: update values schema json"
+          go-version: 'stable'
+      - name: Install schema generator
+        run: go install github.com/losisin/helm-values-schema-json/v2@v2.4.0
+      - name: Regenerate schema
+        working-directory: charts/permify
+        run: helm-values-schema-json -f values.yaml -o values.schema.json
+      - name: Fail if schema is stale
+        run: |
+          if ! git diff --exit-code charts/permify/values.schema.json; then
+            echo "::error::charts/permify/values.schema.json is out of date with values.yaml."
+            echo "Regenerate locally and commit the result:"
+            echo "  go install github.com/losisin/helm-values-schema-json/v2@v2.4.0"
+            echo "  cd charts/permify && helm-values-schema-json -f values.yaml -o values.schema.json"
+            exit 1
+          fi

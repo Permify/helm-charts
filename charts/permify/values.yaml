@@ -86,7 +86,7 @@ app:
     method: preshared
     preshared:
       # keys_secret:
-      keys: []
+      keys: [] # @schema type: array; item: string
 
   tracer:
     enabled: false
