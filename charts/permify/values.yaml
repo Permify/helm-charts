@@ -129,7 +129,10 @@ app:
 
   distributed:
     enabled: false
-    address: "demo:///grpc.demo.consistent_hash_balancer"
+    # Leave empty to auto-target the chart's headless service via dns://.
+    # Override only when pointing at a different service, e.g.:
+    #   address: "dns:///my-service.my-namespace.svc.cluster.local:5053"
+    address: ""
     port: 5053
 
 # Ingress configuration
