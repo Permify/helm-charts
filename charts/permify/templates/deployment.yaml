@@ -410,9 +410,13 @@ spec:
               value: "{{ .Values.app.distributed.enabled }}"
             {{- end }}
 
-            {{- if .Values.app.distributed.address }}
+            {{- if .Values.app.distributed.enabled }}
             - name: PERMIFY_DISTRIBUTED_ADDRESS
+              {{- if .Values.app.distributed.address }}
               value: "{{ .Values.app.distributed.address }}"
+              {{- else }}
+              value: "dns:///{{ include "permify.fullname" . }}-headless.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.app.distributed.port }}"
+              {{- end }}
             {{- end }}
 
             {{- if .Values.app.distributed.port }}
